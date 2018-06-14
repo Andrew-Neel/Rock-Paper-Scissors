@@ -20,7 +20,7 @@ public class RPSMain{
    public static int numberOfPlayers(Scanner console){
       System.out.print("1 or 2 players? ");
       int players = console.nextInt();
-      while(players > 2){
+      while(players > 2){ // to ensure a valid move
          System.out.println("Thats too many players! try again");
          System.out.print("1 or 2 players? ");
          players = console.nextInt();
@@ -41,7 +41,7 @@ public class RPSMain{
       System.out.print("Player 1 choose a move. rock, paper or scissors: ");
       String player1 = console.next();
       int p1 = 0;
-      while(p1 == 0){
+      while(p1 == 0){ //makes sure user puts a valid move
          if(!player1.equalsIgnoreCase("rock")){
             if(!player1.equalsIgnoreCase("paper")){
                if(!player1.equalsIgnoreCase("scissors")){
@@ -57,7 +57,7 @@ public class RPSMain{
             p1 = 1;
          }
       }
-      for(int i = 0; i < 40; i++){
+      for(int i = 0; i < 50; i++){ //an attempt to make sure player 2 doesn't cheat. it's not perfect
          System.out.println("****************");
       }
       System.out.println("Player 1 don't look! (make sure your move is hidden)");
@@ -158,6 +158,7 @@ public class RPSMain{
       Random rand = new Random();
       int r = rand.nextInt(3);
       String player2 = " ";
+      //randy
       if(!"bonny".equalsIgnoreCase(playerName)){
          if(r == 0){
             player2 = "rock";
@@ -167,6 +168,7 @@ public class RPSMain{
             player2 = "scissors";
          }
       }
+      //bonny
       if(playerName.equalsIgnoreCase("bonny")){
          if(P1Last.equals(" ")){
             player2 = "rock";  
