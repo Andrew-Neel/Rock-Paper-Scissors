@@ -40,47 +40,15 @@ public class RPSMain{
       System.out.println("Player 2 don't look!");
       System.out.print("Player 1 choose a move. rock, paper or scissors: ");
       String player1 = console.next();
-      int p1 = 0;
-      while(p1 == 0){ //makes sure user puts a valid move
-         if(!player1.equalsIgnoreCase("rock")){
-            if(!player1.equalsIgnoreCase("paper")){
-               if(!player1.equalsIgnoreCase("scissors")){
-                  System.out.print("not a valid move try again: ");
-                  player1 = console.next();
-               }else{
-                  p1 = 1;
-               }
-            }else{
-               p1 = 1;
-            }
-         }else{
-            p1 = 1;
-         }
-      }
+      player1 = Validate(player1, console);      
       for(int i = 0; i < 50; i++){ //an attempt to make sure player 2 doesn't cheat. it's not perfect
          System.out.println("****************");
       }
       System.out.println("Player 1 don't look! (make sure your move is hidden)");
       System.out.print("Player 2 choose a move. rock, paper or scissors: ");
       String player2 = console.next();
-      int p2 = 0;
-      while(p2 == 0){
-         if(!player2.equalsIgnoreCase("rock")){
-            if(!player2.equalsIgnoreCase("paper")){
-               if(!player2.equalsIgnoreCase("scissors")){
-                  System.out.print("not a valid move try again: ");
-                  player2 = console.next();
-               }else{
-                  p2 = 1;
-               }
-            }else{
-               p2 = 1;
-            }
-         }else{
-            p2 = 1;
-         }
-      }
-      determineWinner(player1, player2, score);
+      player2 = Validate(player2, console);      
+      determineWinner(player1, player2, score, "player 2");
       System.out.println("score: " + score[0] + " to " + score[1]);
       System.out.print("play again? y or n ");
       String again = console.next();
@@ -92,27 +60,11 @@ public class RPSMain{
    public static void onePlayerGame(Scanner console, int[] score, String Opponent, String P1Last){
       System.out.print("Player 1 choose a move. rock, paper or scissors: ");
       String player1 = console.next();
-      int p1 = 0;
-      while(p1 == 0){
-         if(!player1.equalsIgnoreCase("rock")){
-            if(!player1.equalsIgnoreCase("paper")){
-               if(!player1.equalsIgnoreCase("scissors")){
-                  System.out.print("not a valid move try again: ");
-                  player1 = console.next();
-               }else{
-                  p1 = 1;
-               }
-            }else{
-               p1 = 1;
-            }
-         }else{
-            p1 = 1;
-         }
-      }
-      System.out.println("Player 2 is thinking...");
+      player1 = Validate(player1, console);
+      System.out.println(Opponent + " is thinking...");
       String player2 = computerChoose(Opponent, P1Last);   
                   
-      determineWinner(player1, player2, score);
+      determineWinner(player1, player2, score, Opponent);
       System.out.println("score: " + score[0] + " to " + score[1]);
       System.out.print("play again? y or n ");
       String again = console.next();
@@ -122,10 +74,10 @@ public class RPSMain{
 
    }
    //takes the players input moves and compares them then updates a score
-   public static int[] determineWinner(String player1, String player2, int[] score){     
-      System.out.println("player 1 chose: " + player1 + " and player 2 chose: " + player2);
+   public static int[] determineWinner(String player1, String player2, int[] score, String P2name){     
+      System.out.println("player 1 chose: " + player1 + " and " + P2name + " chose: " + player2);
       if(player1.equalsIgnoreCase("rock") && player2.equalsIgnoreCase("paper")){
-         System.out.println("player 2 wins!");
+         System.out.println(P2name + " wins!");
          score[1]++;
       }
       if(player1.equalsIgnoreCase("rock") && player2.equalsIgnoreCase("scissors")){
@@ -140,11 +92,11 @@ public class RPSMain{
          score[0]++;
       }
       if(player1.equalsIgnoreCase("paper") && player2.equalsIgnoreCase("scissors")){
-         System.out.println("player 2 wins!");
+         System.out.println(P2name + " wins!");
          score[1]++;
       }
             if(player1.equalsIgnoreCase("scissors") && player2.equalsIgnoreCase("rock")){
-         System.out.println("player 2 wins!");
+         System.out.println(P2name + " wins!");
          score[1]++;
       }
       if(player1.equalsIgnoreCase("scissors") && player2.equalsIgnoreCase("paper")){
@@ -185,5 +137,35 @@ public class RPSMain{
       }
       
    return player2;
+   }
+   
+   public static String Validate(String player, Scanner console){
+      int p1 = 0;
+      while(p1 == 0){ //makes sure user puts a valid move
+         if(player.equalsIgnoreCase("r")){
+            player = "rock";
+         }
+         if(player.equalsIgnoreCase("p")){
+            player = "paper";
+         }
+         if(player.equalsIgnoreCase("s")){
+            player = "scissors";
+         }
+         if(!player.equalsIgnoreCase("rock")){
+            if(!player.equalsIgnoreCase("paper")){
+               if(!player.equalsIgnoreCase("scissors")){
+                  System.out.print("not a valid move try again: ");
+                  player = console.next();
+               }else{
+                  p1 = 1;
+               }
+            }else{
+               p1 = 1;
+            }
+         }else{
+            p1 = 1;
+         }
+      }
+   return player;
    }
 }
